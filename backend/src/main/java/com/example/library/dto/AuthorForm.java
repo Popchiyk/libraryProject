@@ -1,4 +1,6 @@
 package com.example.library.dto;
 
-public class AuthorPost {
+public class AuthorForm {
+
+    
 }
