@@ -12,6 +12,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    private String name;
     private String lastName;
 
     private String listOfBook;
@@ -19,8 +20,9 @@ public class Author {
     public Author() {
     }
 
-    public Author(Integer id, String lastName, String listOfBook) {
+    public Author(Integer id, String name, String lastName, String listOfBook) {
         this.id = id;
+        this.name = name;
         this.lastName = lastName;
         this.listOfBook = listOfBook;
     }
@@ -47,5 +49,13 @@ public class Author {
 
     public void setListOfBook(String listOfBook) {
         this.listOfBook = listOfBook;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

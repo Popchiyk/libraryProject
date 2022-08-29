@@ -26,12 +26,13 @@ public class AuthorService {
     }
 
     public Author update(Author author){
-        Author oldAuthor = getById(author.getId());
-        oldAuthor.setId(author.getId());
-        oldAuthor.setLastName(author.getLastName());
-        oldAuthor.setListOfBook(author.getListOfBook());
-        repository.save(oldAuthor);
-        return oldAuthor;
+        Author newAuthor = getById(author.getId());
+        newAuthor.setId(author.getId());
+        newAuthor.setLastName(author.getLastName());
+        newAuthor.setName(author.getName());
+        newAuthor.setListOfBook(author.getListOfBook());
+        repository.save(newAuthor);
+        return newAuthor;
     }
 
     public void delete(Integer id){
