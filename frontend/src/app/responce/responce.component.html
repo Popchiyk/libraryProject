@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div class="container" style="margin-top: 10px;">
+    <table class="table" *ngIf="isHaveBook">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Auhtor fullname</th>
+            <th scope="col">List of books</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let books of book">
+          <tr>
+            <th scope="row">{{books?.id}}</th>
+            <td>{{books.name}}</td>
+            <td>{{books.genre}}</td>
+            <td>{{books.id_author.name}} {{books.id_author.lastName}}</td>
+            <td>{{books.id_author.listOfBook}}</td>
+            <td><a type="button" class="btn btn-outline-secondary">Update</a></td> 
+            <td><a type="button" class="btn btn-outline-dark">Delete</a></td> 
+          </tr>
+        </tbody>
+      </table>
+      <h4 *ngIf="!isHaveBook"> We don`t have books</h4>
+</div>
