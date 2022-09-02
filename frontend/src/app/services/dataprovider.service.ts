@@ -27,4 +27,8 @@ export class DataproviderService {
   public getAllAuthor():Observable<Author[]>{
     return this.http.get<Author[]>(this.localhost+"author/")
   }
+
+  public addBook(bookRequest:Book):Observable<any>{
+    return this.http.post(this.localhost+"book/",bookRequest)
+  }
 }

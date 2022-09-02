@@ -7,6 +7,7 @@ import { ResponceComponent } from './responce/responce.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormDataComponent } from './form-data/form-data.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
 { path: "", component:NavbarComponent ,pathMatch:'full'},
@@ -24,6 +25,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

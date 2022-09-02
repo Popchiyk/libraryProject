@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Author } from '../entity/author';
+import { Book } from '../entity/book';
+import { DataproviderService } from '../services/dataprovider.service';
 
 @Component({
   selector: 'app-form-data',
@@ -12,12 +16,30 @@ export class FormDataComponent implements OnInit {
   isAddAuthor?:boolean;
   isUpdateAuthor?:boolean;
   isUpdateBook?:boolean;
-  constructor(private router:ActivatedRoute) { }
+  authorList?:Author[];
+  bookAdd:Book;
+  formAddBook:FormGroup;
+  constructor(private router:ActivatedRoute,private service:DataproviderService,private formbuilder:FormBuilder,private _router:Router) {
+    this.formAddBook = formbuilder.group({
+    date:['',[Validators.required]],
+    genre:['',[Validators.required,Validators.minLength(4),Validators.maxLength(10)]],
+    name:['',[Validators.required,Validators.minLength(3),Validators.maxLength(15)]],
+    author:['',[Validators.required]]
+    })
 
+    this.bookAdd={
+      name : "",
+      id_author : new Author,
+      genre: "",
+      dateOfPublication : new Date,
+      id : 0
+    }
+   }
   ngOnInit(): void {
     this.router.params.subscribe(params=>{
       if(params['param'] === 'add' && params['name'] === 'book'){
         this.isAddBook = true;
+        this.getAllAuthor();
       }else{
         this.isAddBook = false;
       }
@@ -36,6 +58,23 @@ export class FormDataComponent implements OnInit {
       }else{
         this.isUpdateBook = false;
       }
+    })
+  }
+
+  getAllAuthor(){
+    this.service.getAllAuthor().subscribe(data=>{
+      this.authorList = data;
+    })
+  }
+
+  addBook(){
+    this.bookAdd.dateOfPublication = this.formAddBook.get('date')?.value;
+    this.bookAdd.genre =  this.formAddBook.get('genre')?.value;
+    this.bookAdd.name =  this.formAddBook.get('name')?.value;
+    this.bookAdd.id_author.id =  this.formAddBook.get('author')?.value;
+    console.log(this.bookAdd)
+    this.service.addBook(this.bookAdd).subscribe(data=>{
+      this._router.navigate(['/table/book'])
     })
   }
 
