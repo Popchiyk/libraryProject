@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container" style="margin-top: 10px;">
+<div class="container" style="margin-top: 10px;" *ngIf="isTableBook">
     <table class="table" *ngIf="isHaveBook">
         <thead>
           <tr>
@@ -24,5 +24,30 @@
           </tr>
         </tbody>
       </table>
-      <h4 *ngIf="!isHaveBook"> We don`t have books</h4>
+      <h4 *ngIf="!isHaveBook"> We don`t have Book</h4>
+      </div>
+      <div class="container" style="margin-top: 10px;" *ngIf="isTableAuthor">
+        <table class="table" *ngIf="isHaveAuthor">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">lastName</th>
+                <th scope="col">List of books</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let authors of author">
+              <tr>
+                <th scope="row">{{authors.id}}</th>
+                <td>{{authors.name}}</td>
+                <td>{{authors.lastName}}</td>
+                <td>{{authors.listOfBook}}</td>
+                <td><a type="button" class="btn btn-outline-secondary">Update</a></td> 
+                <td><a (click)="deleteAuthor(authors.id)" class="btn btn-outline-dark">Delete</a></td> 
+              </tr>
+            </tbody>
+          </table>
+          <h4 *ngIf="!isHaveAuthor"> We don`t have author</h4>
 </div>

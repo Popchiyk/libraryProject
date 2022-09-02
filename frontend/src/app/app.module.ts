@@ -6,16 +6,20 @@ import { AppComponent } from './app.component';
 import { ResponceComponent } from './responce/responce.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormDataComponent } from './form-data/form-data.component';
 
 const routes: Routes = [
-{ path: "", component:ResponceComponent ,pathMatch: 'full'},
+{ path: "", component:NavbarComponent ,pathMatch:'full'},
+{ path: "table/:name", component:ResponceComponent},
+{ path: ":param/:name", component:FormDataComponent},
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     ResponceComponent,
-    NavbarComponent
+    NavbarComponent,
+    FormDataComponent
   ],
   imports: [
     BrowserModule,

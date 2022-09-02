@@ -1,5 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Author } from '../entity/author';
 import { Book } from '../entity/book';
 import { DataproviderService } from '../services/dataprovider.service';
 
@@ -11,11 +13,25 @@ import { DataproviderService } from '../services/dataprovider.service';
 export class ResponceComponent implements OnInit {
 
   book?:Book[];
+  author?:Author[];
   isHaveBook?:boolean;
-  constructor(private service:DataproviderService) { }
+  isTableAuthor?:boolean;
+  isTableBook?:boolean;
+  isHaveAuthor?:boolean;
+  constructor(private service:DataproviderService,private router:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getAllBook();
+    this.router.params.subscribe(param=>{
+      if(param['name'] == 'book'){
+        this.isTableBook=true;
+        this.getAllBook();
+      }
+      if(param['name'] == 'author'){
+        this.isTableAuthor=true;
+        this.getAllAuthor();
+      }
+    })
+    
   }
 
   getAllBook(){
@@ -26,16 +42,36 @@ export class ResponceComponent implements OnInit {
       }else{
         this.isHaveBook = true;
       }
-      console.log(this.isHaveBook)
     })
   }
 
   deleteBook(id:number){
     this.service.deleteBook(id).subscribe(()=>{
-      console.log(true)
+      location.reload();
     },
     (err:HttpErrorResponse)=>{
-      console.log(err.message)
+      window.alert(err.message)
+    }
+    )
+  }
+
+  getAllAuthor(){
+    this.service.getAllAuthor().subscribe(data=>{
+      this.author = data;
+      if(this.author.length ===0){
+        this.isHaveAuthor = false;
+      }else{
+        this.isHaveAuthor = true;
+      }
+    })
+  }
+
+  deleteAuthor(id:number){
+    this.service.deleteAuthor(id).subscribe(()=>{
+      location.reload();
+    },
+    (err:HttpErrorResponse)=>{
+      window.alert(err.message)
     }
     )
   }
