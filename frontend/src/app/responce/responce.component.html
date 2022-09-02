@@ -20,7 +20,7 @@
             <td>{{books.id_author.name}} {{books.id_author.lastName}}</td>
             <td>{{books.id_author.listOfBook}}</td>
             <td><a type="button" class="btn btn-outline-secondary">Update</a></td> 
-            <td><a type="button" class="btn btn-outline-dark">Delete</a></td> 
+            <td><a (click)="deleteBook(books.id)" class="btn btn-outline-dark">Delete</a></td> 
           </tr>
         </tbody>
       </table>
