@@ -8,10 +8,14 @@ import { Book } from '../entity/book';
 })
 
 export class DataproviderService {
-  ip = "http://localhost:8080/api/v1/";
+  localhost = "http://localhost:8080/api/v1/";
   constructor(private http:HttpClient) { }
   
   public getAllBook():Observable<Book[]> {
-    return this.http.get<Book[]>(this.ip+"book/")
+    return this.http.get<Book[]>(this.localhost+"book/")
+  }
+
+  public deleteBook(id:number):Observable<void>{
+    return this.http.delete<void>(this.localhost+"book/"+id)
   }
 }

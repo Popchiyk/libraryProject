@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../entity/book';
 import { DataproviderService } from '../services/dataprovider.service';
@@ -27,6 +28,16 @@ export class ResponceComponent implements OnInit {
       }
       console.log(this.isHaveBook)
     })
+  }
+
+  deleteBook(id:number){
+    this.service.deleteBook(id).subscribe(()=>{
+      console.log(true)
+    },
+    (err:HttpErrorResponse)=>{
+      console.log(err.message)
+    }
+    )
   }
 
 }
